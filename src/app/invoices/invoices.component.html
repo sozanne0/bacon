@@ -1,3 +1,11 @@
-<p>
-  invioce-manager works!
-</p>
+<H2>Invoice List</H2>
+<table class="slist">
+  <tr>
+    <th>Invoice #</th>
+    <th>Customer</th>
+  </tr>
+  <tr *ngFor="let invoice of invoices">
+    <td>{{invoice.id}}</td>
+    <td>{{invoice.customer}}</td>
+  </tr>
+</table>
