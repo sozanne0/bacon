@@ -1,3 +1,24 @@
-<p>
-  vendors works!
-</p>
+<H2>Vendor List</H2>
+<div>
+    <label>Vendor name:
+      <input #vendorName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(vendorName.value); vendorName.value=''">
+      add
+    </button>
+  </div>
+
+<table class="slist">
+  <tr>
+    <th>Vendor ID</th>
+    <th>Vendor Code</th>
+    <th>Vendor Name</th>
+  </tr>
+  <tr *ngFor="let vendor of vendors">
+    <td><a routerLink="/vendor/{{vendor.id}}">{{vendor.id}}</a></td>
+    <td>{{vendor.code}}</td>
+    <td>{{vendor.name}}</td>
+  </tr>
+</table>
+
