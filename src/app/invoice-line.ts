@@ -5,6 +5,7 @@ export class InvoiceLine {
   vendorId: number;
   description: string;
   unitCost: number;
+  quantity: number;
   totalCost: number;
   dateCreated; Date;
 }

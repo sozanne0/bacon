@@ -15,7 +15,8 @@ export class InvoicesComponent implements OnInit {
   constructor(private invoiceService: InvoiceService) { }
 
   getInvoices(): void {
-    this.invoices = this.invoiceService.getInvoices();
+    this.invoiceService.getInvoices()
+          .subscribe(invoices => this.invoices = invoices);
   }
 
   ngOnInit() {
