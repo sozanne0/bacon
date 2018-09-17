@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { ItemsService } from '../items.service';
+import { InvoiceLine } from '../invoice-line';
+
 
 @Component({
   selector: 'app-item-detail',
@@ -7,9 +13,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemDetailComponent implements OnInit {
 
-  constructor() { }
+  invoiceLine: InvoiceLine;
+
+  constructor(
+    private route: ActivatedRoute,
+    private itemsService: ItemsService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.getInvoiceLine();
+  }
+
+  getInvoiceLine(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.itemsService.getInvoiceLine(id)
+      .subscribe(anInvoiceLine => this.invoiceLine = anInvoiceLine);
+  }
+
+  save(): void {
+    this.itemsService.updateInvoiceLine(this.invoiceLine)
+      .subscribe(() => this.goBack());
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

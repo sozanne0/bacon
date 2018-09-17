@@ -15,7 +15,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 1004, customer: 'John'}
         ];
 
-    const invoiceLines = [
+    const invoicelines = [
       { id: 201, invoiceId: 1001, line: 1, vendorId: 102, description: ' silver bracelet', unitCost: 10.50, quantity: 2},
       { id: 202, invoiceId: 1001, line: 2, vendorId: 101, description: 'Golden Delicious', unitCost: 5.55, quantity: 1},
       { id: 203, invoiceId: 1002, line: 1, vendorId: 103, description: 'landscape', unitCost: 20, quantity: 2},
@@ -24,6 +24,6 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 206, invoiceId: 1003, line: 3, vendorId: 102, description: 'ring', unitCost: 1.50, quantity: 3}
     ];
 
-    return{ vendors, invoices, invoiceLines };
+    return{ vendors, invoices, invoicelines };
   }
 }

@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Invoice } from './invoice';
+import { InvoiceLine } from './invoice-line';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,13 +20,14 @@ export class InvoiceService {
   ) {}
 
   private invoicesUrl = 'api/invoices';  // URL to web api
+  private invoiceLinesUrl = 'api/invoicelines';  // URL to web api
 
   /** get all invoices */
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.invoicesUrl)
       .pipe(
         tap(invoices => this.log('fetched invoices')),
-        catchError(this.handleError('getHeroes', []))
+        catchError(this.handleError('getInvoices', []))
     );
   }
 
@@ -38,7 +40,7 @@ export class InvoiceService {
     );
   }
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new invoice to the server */
   addInvoice (invoice: Invoice): Observable<Invoice> {
     return this.http.post<Invoice>(this.invoicesUrl, invoice, httpOptions).pipe(
       tap((invoic: Invoice) => this.log(`added invoice w/ id=${invoic.id}`)),
@@ -50,7 +52,7 @@ export class InvoiceService {
   updateInvoice (invoice: Invoice): Observable<any> {
     return this.http.put(this.invoicesUrl, invoice, httpOptions).pipe(
       tap(_ => this.log(`updated invoice id=${invoice.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateInvoice'))
     );
   }
 
@@ -58,7 +60,6 @@ export class InvoiceService {
   deleteInvoice (invoice: Invoice | number): Observable<Invoice> {
     const id = typeof invoice === 'number' ? invoice : invoice.id;
     const url = `${this.invoicesUrl}/${id}`;
-
     return this.http.delete<Invoice>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted invoice id=${id}`)),
       catchError(this.handleError<Invoice>('deleteInvoice'))

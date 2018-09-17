@@ -19,6 +19,13 @@ export class InvoicesComponent implements OnInit {
           .subscribe(invoices => this.invoices = invoices);
   }
 
+  add(): void {
+    this.invoiceService.addInvoice({ customer: '' } as Invoice)
+      .subscribe(invoice => {
+        this.invoices.push(invoice);
+      });
+  }
+
   ngOnInit() {
     this.getInvoices();
   }

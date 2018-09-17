@@ -1,3 +1,25 @@
-<p>
-  invoice-detail works!
-</p>
+<div *ngIf="invoice">
+    <h2>Bill of Sale {{invoice.id}} Details</h2>
+    <div><span>Bill #: </span>{{invoice.id}}</div>
+    <div>
+      <label>customer:
+        <input [(ngModel)]="invoice.customer" placeholder="customer"/>
+      </label>
+    </div>
+    <div>
+      <label>address:
+        <input [(ngModel)]="invoice.address" placeholder="address"/>
+      </label>
+    </div>
+    <div>
+      <label>contact:
+        <input [(ngModel)]="invoice.contact" placeholder="phone/email"/>
+      </label>
+    </div>
+    <div><span>created: </span>{{invoice.timeCreated}}</div>
+
+    <app-items [invoice]="invoice"></app-items>
+
+    <button (click)="save()">Save</button>
+    <button (click)="goBack()">go back</button>
+  </div>

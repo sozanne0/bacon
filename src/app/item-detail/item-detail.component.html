@@ -1,3 +1,44 @@
-<p>
-  item-detail works!
-</p>
+<div *ngIf="invoiceLine">
+  <h2>Line {{invoiceLine.line}} Details</h2>
+  <div><span>Bill #: </span>{{invoiceLine.invoiceid}}</div>
+  <div>
+    <label>Vendor:
+      <input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/>
+    </label>
+  </div>
+  <div>
+    <label>Description:
+      <input [(ngModel)]="invoiceLine.description" placeholder="description"/>
+    </label>
+  </div>
+  <div>
+    <label>Quantity:
+      <input [(ngModel)]="invoiceLine.quantity" placeholder="quantity"/>
+    </label>
+  </div>
+  <div>
+    <label>Unit Price:
+      <input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost"/>
+    </label>
+  </div>
+  <div><span>Total Price: </span>{{invoiceLine.totalCost}}</div>
+  <div><span>created: </span>{{invoiceLine.timeCreated}}</div>
+
+  <table>
+    <tr>
+      <th>Line</th><th>Vendor</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total Price</th>
+    </tr>
+    <tr>
+        <td>{{invoiceLine.line}}</td>
+        <td><input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/></td>
+        <td><input [(ngModel)]="invoiceLine.description" placeholder="description"/></td>
+        <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity"/></td>
+        <td><input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost"/></td>
+        <td>{{invoiceLine.quantity}}*{{invoiceLine.unitCost}}</td>
+      </tr>
+  </table>
+
+  <button (click)="save()">Save</button>
+  <button (click)="goBack()">go back</button>
+</div>
+

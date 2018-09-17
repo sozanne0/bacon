@@ -16,6 +16,7 @@ import { VendorDetailComponent } from './vendor-detail/vendor-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ReportsComponent } from './reports/reports.component';
 import { DateTimeComponent } from './date-time.component';
+import { ItemsComponent } from './items/items.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { DateTimeComponent } from './date-time.component';
     VendorDetailComponent,
     ItemDetailComponent,
     ReportsComponent,
-    DateTimeComponent
+    DateTimeComponent,
+    ItemsComponent
   ],
   imports: [
     BrowserModule,
