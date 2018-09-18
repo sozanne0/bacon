@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ItemsService } from '../items.service';
 import { Invoice } from '../invoice';
@@ -14,6 +14,8 @@ export class ItemsComponent implements OnInit {
   @Input () invoice: Invoice;
   invoiceLines: InvoiceLine[];
   lineCount: number;
+  @Output() change: EventEmitter<number> = new EventEmitter<number>();
+  sum: number;
 
   constructor(private invoiceItemsService: ItemsService) { }
 
@@ -26,6 +28,7 @@ export class ItemsComponent implements OnInit {
   initializeLines(invoiceItems): void {
     this.invoiceLines = invoiceItems;
     this.lineCount = invoiceItems.length;
+    this.computeSum();
   }
 
   add(): void {
@@ -37,6 +40,19 @@ export class ItemsComponent implements OnInit {
 
   ngOnInit() {
     this.getInvoiceItems(this.invoice);
+  //  console.log('**items init');
   }
 
+  computeSum(): void {
+    let tempSum: number;
+    tempSum = 0;
+    if (this.invoiceLines != null) {
+      this.invoiceLines.forEach( function(item) {
+        tempSum += item.totalCost;
+      //  console.log('** summing lines', [tempSum]);
+      });
+    }
+    this.sum = tempSum;
+    this.change.emit(tempSum);
+   }
 }

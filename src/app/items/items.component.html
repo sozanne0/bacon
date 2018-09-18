@@ -7,20 +7,21 @@
 
 <table class="slist">
     <tr>
-      <th>Line ID</th>
-      <th>Invoice ID</th>
       <th>Line #</th>
+      <th>Invoice ID</th>
       <th>Vendor Code</th>
+      <th>Description</th>
       <th>Qty</th>
       <th>Unit Price</th>
+      <th>Total Price</th>
     </tr>
     <tr *ngFor="let line of invoiceLines">
-        <td><a routerLink="/item/{{line.id}}">{{line.id}}</a></td>
+        <td><a routerLink="/item/{{line.id}}">{{line.line}}</a></td>
         <td>{{line.invoiceId}}</td>
-        <td>{{line.line}}</td>
         <td>{{line.vendorId}}</td>
+        <td>{{line.description}}</td>
         <td>{{line.quantity}}</td>
-        <td>{{line.unitCost}}</td>
-        <td>{{line.totalCost}}</td>
+        <td>{{line.unitCost | currency : "USD"}}</td>
+        <td>{{line.totalCost | currency : "USD"}}</td>
     </tr>
   </table>

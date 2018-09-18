@@ -1,6 +1,5 @@
 <div *ngIf="invoice">
-    <h2>Bill of Sale {{invoice.id}} Details</h2>
-    <div><span>Bill #: </span>{{invoice.id}}</div>
+    <h2>Sales Receipt {{invoice.id}} Details</h2>
     <div>
       <label>customer:
         <input [(ngModel)]="invoice.customer" placeholder="customer"/>
@@ -16,10 +15,11 @@
         <input [(ngModel)]="invoice.contact" placeholder="phone/email"/>
       </label>
     </div>
-    <div><span>created: </span>{{invoice.timeCreated}}</div>
+<!--    <div><span>created: </span>{{invoice.timeCreated}}</div> -->
+    <div><span>Total Paid: </span>{{itemSum | currency : "USD"}}</div>
 
-    <app-items [invoice]="invoice"></app-items>
+    <app-items [invoice]="invoice" (change)="sumChange($event)"></app-items>
 
-    <button (click)="save()">Save</button>
+    <button (click)="save()">Save</button>&nbsp;
     <button (click)="goBack()">go back</button>
   </div>

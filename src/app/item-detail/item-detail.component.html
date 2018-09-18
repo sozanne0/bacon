@@ -1,28 +1,6 @@
 <div *ngIf="invoiceLine">
   <h2>Line {{invoiceLine.line}} Details</h2>
-  <div><span>Bill #: </span>{{invoiceLine.invoiceid}}</div>
-  <div>
-    <label>Vendor:
-      <input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/>
-    </label>
-  </div>
-  <div>
-    <label>Description:
-      <input [(ngModel)]="invoiceLine.description" placeholder="description"/>
-    </label>
-  </div>
-  <div>
-    <label>Quantity:
-      <input [(ngModel)]="invoiceLine.quantity" placeholder="quantity"/>
-    </label>
-  </div>
-  <div>
-    <label>Unit Price:
-      <input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost"/>
-    </label>
-  </div>
-  <div><span>Total Price: </span>{{invoiceLine.totalCost}}</div>
-  <div><span>created: </span>{{invoiceLine.timeCreated}}</div>
+  <div><span>Sales Receipt #: </span>{{invoiceLine.invoiceId}}</div>
 
   <table>
     <tr>
@@ -34,7 +12,7 @@
         <td><input [(ngModel)]="invoiceLine.description" placeholder="description"/></td>
         <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity"/></td>
         <td><input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost"/></td>
-        <td>{{invoiceLine.quantity}}*{{invoiceLine.unitCost}}</td>
+        <td>{{invoiceLine.totalCost | currency : "USD"}}</td>
       </tr>
   </table>
 

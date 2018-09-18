@@ -16,12 +16,12 @@ export class InMemoryDataService implements InMemoryDbService {
         ];
 
     const invoicelines = [
-      { id: 201, invoiceId: 1001, line: 1, vendorId: 102, description: ' silver bracelet', unitCost: 10.50, quantity: 2},
-      { id: 202, invoiceId: 1001, line: 2, vendorId: 101, description: 'Golden Delicious', unitCost: 5.55, quantity: 1},
-      { id: 203, invoiceId: 1002, line: 1, vendorId: 103, description: 'landscape', unitCost: 20, quantity: 2},
-      { id: 204, invoiceId: 1003, line: 1, vendorId: 103, description: 'seascape', unitCost: 25.00, quantity: 1},
-      { id: 205, invoiceId: 1003, line: 2, vendorId: 102, description: 'necklass', unitCost: 75.99, quantity: 1},
-      { id: 206, invoiceId: 1003, line: 3, vendorId: 102, description: 'ring', unitCost: 1.50, quantity: 3}
+      { id: 201, invoiceId: 1001, line: 1, vendorId: 102, description: ' silver bracelet', unitCost: 10.50, quantity: 2, totalCost: 21},
+      { id: 202, invoiceId: 1001, line: 2, vendorId: 101, description: 'Golden Delicious', unitCost: 5.55, quantity: 1, totalCost: 5.55},
+      { id: 203, invoiceId: 1002, line: 1, vendorId: 103, description: 'landscape', unitCost: 20, quantity: 2, totalCost: 40},
+      { id: 204, invoiceId: 1003, line: 1, vendorId: 103, description: 'seascape', unitCost: 25.00, quantity: 1, totalCost: 25},
+      { id: 205, invoiceId: 1003, line: 2, vendorId: 102, description: 'necklass', unitCost: 75.99, quantity: 1, totalCost: 75.99},
+      { id: 206, invoiceId: 1003, line: 3, vendorId: 102, description: 'ring', unitCost: 1.50, quantity: 3, totalCost: 4.5}
     ];
 
     return{ vendors, invoices, invoicelines };

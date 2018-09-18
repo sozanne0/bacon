@@ -32,6 +32,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   save(): void {
+    this.invoiceLine.totalCost = this.invoiceLine.quantity * this.invoiceLine.unitCost;
     this.itemsService.updateInvoiceLine(this.invoiceLine)
       .subscribe(() => this.goBack());
   }

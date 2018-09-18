@@ -14,6 +14,7 @@ import { Invoice } from '../invoice';
 export class InvoiceDetailComponent implements OnInit {
 
   invoice: Invoice;
+  itemSum: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,10 @@ export class InvoiceDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.invoiceService.getInvoice(id)
       .subscribe(anInvoice => this.invoice = anInvoice);
+  }
+
+  sumChange(event) {
+    this.itemSum = event;
   }
 
   save(): void {
