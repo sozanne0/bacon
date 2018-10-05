@@ -1,0 +1,18 @@
+<H2>Sales Receipts</H2>
+<div>
+  <!-- (click) creates a new empty invoice -->
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+
+<table class="slist">
+  <tr>
+    <th>Receipt #</th>
+    <th>Customer</th>
+  </tr>
+  <tr *ngFor="let invoice of invoices">
+      <td><a routerLink="/invoice/{{invoice.id}}">{{invoice.id}}</a></td>
+      <td>{{invoice.customer}}</td>
+  </tr>
+</table>

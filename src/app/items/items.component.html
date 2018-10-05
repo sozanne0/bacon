@@ -1,0 +1,25 @@
+<div>
+  <!-- (click) creates a new empty invoice line -->
+  <button (click)="add()">
+    Add
+  </button>
+</div>
+
+<table class="slist">
+    <tr>
+      <th>Line #</th>
+      <th>Vendor Code</th>
+      <th>Description</th>
+      <th>Qty</th>
+      <th>Unit Price</th>
+      <th>Total Price</th>
+    </tr>
+    <tr *ngFor="let line of invoiceLines">
+        <td><a routerLink="/item/{{line.id}}">{{line.line}}</a></td>
+        <td>{{line?.vendor?.code}}</td>
+        <td>{{line.description}}</td>
+        <td>{{line.quantity}}</td>
+        <td>{{line.unitCost | currency : "USD"}}</td>
+        <td>{{line.totalCost | currency : "USD"}}</td>
+    </tr>
+  </table>

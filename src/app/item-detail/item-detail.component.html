@@ -1,0 +1,63 @@
+<div *ngIf="invoiceLine">
+  <h2>Line {{invoiceLine.line}} Details</h2>
+  <div><span>Sales Receipt #: </span>{{invoiceLine.invoiceId}}</div>
+  <div class="formGroup">
+  <form #f="ngForm">
+    <table>
+      <tr>
+        <th>Line</th><th>Vendor</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total Price</th>
+      </tr>
+      <tr>
+          <td>{{invoiceLine.line}}</td>
+        <!--  <td><input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/></td><-->
+          <td>
+            <select [compareWith]="compareVendors"
+              id="vendor"
+              name="vendor"
+              [(ngModel)]="invoiceLine.vendor"
+              class="form-control"
+              #vendor=ngModel
+              required>
+              <option value="" disabled>Select a vendor code</option>
+              <option *ngFor="let vendor of vendors" [ngValue]="vendor">
+                {{ vendor.code }}
+              </option>
+            </select>
+          </td>
+          <td><input
+            [(ngModel)]="invoiceLine.description" placeholder="description" name="desc"/></td>
+          <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity" name="qty"
+              class="form-control"
+              type="number"
+              #qty=ngModel
+              required/></td>
+          <td><input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost" name="cost"
+              class="form-control"
+              type="number"
+              #cost=ngModel
+              required/></td>
+          <td>{{invoiceLine.totalCost | currency : "USD"}}</td>
+        </tr>
+    </table>
+  </form>
+  </div>
+  <!-- -->
+  <div *ngIf="vendor.invalid && (vendor.dirty || vendor.touched)"
+    class="alert alert-danger">
+    <div *ngIf="vendor.errors">Vendor is required.</div>
+  </div>
+  <div *ngIf="qty.invalid && (qty.dirty || qty.touched)"
+    class="alert alert-danger">
+    <div *ngIf="qty.invalid">Non-zero quantity is required.</div>
+  </div>
+  <div *ngIf="cost.invalid && (cost.dirty || cost.touched)"
+    class="alert alert-danger">
+    <div *ngIf="cost.invalid">Non-zero cost is required.</div>
+  </div>
+
+  <!--<p>Form value: {{ f.value | json }}</p>-->
+
+  <button (click)="save()" [disabled]="!f.valid">Save</button>&nbsp;
+  <button (click)="goBack()">go back</button>
+</div>
+
