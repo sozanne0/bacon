@@ -24,8 +24,8 @@ export class VendorService {
   getVendors(): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(this.vendorsUrl)
       .pipe(
-        tap(vendors => this.log('fetched vendors')),
-        catchError(this.handleError('getHeroes', []))
+        tap(() => this.log(`fetched vendors`)),
+        catchError(this.handleError('getVendors', []))
     );
   }
 
@@ -51,7 +51,7 @@ export class VendorService {
   updateVendor (vendor: Vendor): Observable<any> {
     return this.http.put(this.vendorsUrl, vendor, httpOptions).pipe(
       tap(_ => this.log(`updated vendor id=${vendor.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateVendor'))
     );
   }
 
@@ -62,7 +62,7 @@ export class VendorService {
 
     return this.http.delete<Vendor>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted vendor id=${id}`)),
-      catchError(this.handleError<Vendor>('deletevendor'))
+      catchError(this.handleError<Vendor>('deleteVendor'))
     );
   }
 
@@ -92,5 +92,6 @@ export class VendorService {
    */
   private log(message: string) {
     // TODO: implement logging for users
+    // console.log(message);
   }
 }

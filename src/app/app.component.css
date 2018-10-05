@@ -52,3 +52,12 @@ nav a.active {
   color: white;
 }
 
+/* Forms CSS (could be in separate file) */
+.ng-valid[required] input, .ng-valid.required input  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid input  {
+  border-left: 5px solid #a94442; /* red */
+}
+

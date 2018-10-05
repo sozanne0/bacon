@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { InvoiceService } from '../invoice.service';
 import { Invoice } from '../invoice';
+import { isNullOrUndefined } from 'util';
 
 
 @Component({
@@ -34,9 +35,30 @@ export class InvoiceDetailComponent implements OnInit {
 
   sumChange(event) {
     this.itemSum = event;
+    // console.log('item sum changed');
+  }
+
+  balanceInvoice() {
+    const itemSum = this.itemSum === undefined ? 0 : this.itemSum;
+    const amountPaid = this.invoice.amountPaid === undefined ? 0 : this.invoice.amountPaid;
+    const correction = this.invoice.correctionAmt === undefined ? 0 : this.invoice.correctionAmt;
+    let diff = (itemSum - amountPaid) - correction;
+    diff = +diff.toFixed(2);
+    console.log('sum:', itemSum, 'paid:', amountPaid, 'corr:', correction, ' diff:', diff);
+    if (diff === 0) {
+      this.invoice.status = 'Balanced';
+    } else {
+      this.invoice.status = 'Error';
+    }
   }
 
   save(): void {
+    if (this.invoice.status === '') {
+      this.invoice.status = 'New';
+    }
+    if (this.invoice.correctionAmt === null) {
+      this.invoice.correctionAmt = 0;
+    }
     this.invoiceService.updateInvoice(this.invoice)
       .subscribe(() => this.goBack());
   }

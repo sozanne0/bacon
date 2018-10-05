@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { Invoice } from '../invoice';
 import { InvoiceLine } from '../invoice-line';
+// simport { Vendor } from '../vendor';
 
 @Component({
   selector: 'app-items',
@@ -32,6 +33,7 @@ export class ItemsComponent implements OnInit {
   }
 
   add(): void {
+  //  const vendor = new Vendor;
     this.invoiceItemsService.addInvoiceLine({ invoiceId: this.invoice.id, line: this.lineCount + 1 } as InvoiceLine)
       .subscribe(invoiceLine => {
         this.lineCount = this.invoiceLines.push(invoiceLine);

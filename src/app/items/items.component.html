@@ -8,7 +8,6 @@
 <table class="slist">
     <tr>
       <th>Line #</th>
-      <th>Invoice ID</th>
       <th>Vendor Code</th>
       <th>Description</th>
       <th>Qty</th>
@@ -17,8 +16,7 @@
     </tr>
     <tr *ngFor="let line of invoiceLines">
         <td><a routerLink="/item/{{line.id}}">{{line.line}}</a></td>
-        <td>{{line.invoiceId}}</td>
-        <td>{{line.vendorId}}</td>
+        <td>{{line?.vendor?.code}}</td>
         <td>{{line.description}}</td>
         <td>{{line.quantity}}</td>
         <td>{{line.unitCost | currency : "USD"}}</td>

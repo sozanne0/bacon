@@ -5,6 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Invoice } from './invoice';
 import { InvoiceLine } from './invoice-line';
+import { VendorService } from './vendor.service';
+import { Vendor } from './vendor';
+import { forEach } from '@angular/router/src/utils/collection';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +19,8 @@ const httpOptions = {
 export class ItemsService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private vendorService: VendorService
   ) {}
 
 //  private invoicesUrl = 'api/invoices';  // URL to web api
@@ -29,6 +33,7 @@ export class ItemsService {
       /**const url = this.invoiceLinesUrl; */
       return this.http.get<InvoiceLine[]>(url, httpOptions)
         .pipe(
+          tap(lines => this.addVendors(lines)),
           tap(lines => this.log('fetched invoice lines')),
           catchError(this.handleError('getInvoiceLines', []))
       );
@@ -38,9 +43,24 @@ export class ItemsService {
     getInvoiceLine(id: number): Observable<InvoiceLine> {
       const url = `${this.invoiceLinesUrl}/${id}`;
       return this.http.get<InvoiceLine>(url).pipe(
+        tap(aLine => this.addVendor(aLine)),
         tap(_ => this.log(`fetched invoiceLine id=${id}`)),
         catchError(this.handleError<InvoiceLine>(`getInvoiceLine id=${id}`))
       );
+    }
+
+    private addVendors(lines: InvoiceLine[]): InvoiceLine[] {
+      lines.forEach (line => { this.addVendor(line); });
+      return lines;
+    }
+
+    private addVendor(iLine: InvoiceLine): InvoiceLine {
+      const vid = typeof iLine === 'object' ? iLine.vendorId : undefined;
+      this.log(`Adding Vendor:${vid} for line:${iLine}`);
+      this.vendorService.getVendor(vid)
+          .subscribe(aVendor => iLine.vendor = aVendor);
+
+      return iLine;
     }
 
     /** POST: add a new invoiceLine to the server */
@@ -52,8 +72,9 @@ export class ItemsService {
     }
 
     /** PUT: update the invoiceLine on the server */
-    updateInvoiceLine (invoiceLine: InvoiceLine): Observable<any> {
-      return this.http.put(this.invoiceLinesUrl, invoiceLine, httpOptions).pipe(
+    updateInvoiceLine (invoiceLine: InvoiceLine): Observable<InvoiceLine> {
+      return this.http.put<InvoiceLine>(this.invoiceLinesUrl, invoiceLine, httpOptions).pipe(
+      //  tap((anInvoiceLine: InvoiceLine) => this.addVendor(anInvoiceLine)),
         tap(_ => this.log(`updated invoiceLine id=${invoiceLine.id}`)),
         catchError(this.handleError<any>('updateInvoiceLine'))
       );
@@ -94,6 +115,7 @@ export class ItemsService {
      */
     private log(message: string) {
       // TODO: implement logging for users
+      // console.log(message);
     }
 
 }
