@@ -2,10 +2,10 @@
 <div>
     <label>Vendor name:
       <input #vendorName />
-    </label>
+    </label>&nbsp;&nbsp;
     <!-- (click) passes input value to add() and then clears the input -->
     <button (click)="add(vendorName.value); vendorName.value=''">
-      add
+      Add New Vendor
     </button>
   </div>
 
@@ -14,11 +14,15 @@
     <th>Vendor ID</th>
     <th>Vendor Code</th>
     <th>Vendor Name</th>
+    <th>Location</th>
+    <th>Description</th>
   </tr>
   <tr *ngFor="let vendor of vendors">
-    <td><a routerLink="/vendor/{{vendor.id}}">{{vendor.id}}</a></td>
+    <td><a routerLink="/vendors/{{vendor.id}}">{{vendor.id}}</a></td>
     <td>{{vendor.code}}</td>
     <td>{{vendor.name}}</td>
+    <td>{{vendor.location}}</td>
+    <td>{{vendor.description}}</td>
   </tr>
 </table>
 

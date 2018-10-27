@@ -1,0 +1,43 @@
+<H2>User List</H2>
+<div>
+  Current User: {{currentUser.name}}
+  <p>
+    Login:
+    <select [compareWith]="compareUsers"
+      id="user"
+      name="user"
+      [(ngModel)]="currentUser"
+      #user=ngModel
+      required>
+      <option value="" disabled>Select a user</option>
+      <option *ngFor="let user of users" [ngValue]="user">
+        {{ user.name }}
+      </option>
+    </select>
+  </p>
+  <p>Unselect Current User:
+    <button (click)="currentUser = undefined">Logout</button>
+  </p>
+</div>
+<div>
+    <label>User name:
+      <input #userName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(userName.value); userName.value=''">
+      Add New User
+    </button>
+  </div>
+
+<table class="slist">
+  <tr>
+    <th>User ID</th>
+    <th>User Name</th>
+  </tr>
+  <tr *ngFor="let user of users">
+  <!--  <td><a routerLink="/users/{{user.id}}">{{user.id}}</a></td> -->
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+  </tr>
+</table>
+

@@ -1,8 +1,10 @@
 <H2>Sales Receipts</H2>
 <div>
+  (Current User: {{currentUserInfo()}})
+  <div *ngIf="isCurrentUserUndefined()">Please Select Current User before proceeding!</div>
   <!-- (click) creates a new empty invoice -->
-  <button (click)="add()">
-    Add
+  <button (click)="add()" [disabled]="isCurrentUserUndefined()">
+    Add Receipt
   </button>
 </div>
 
@@ -10,9 +12,13 @@
   <tr>
     <th>Receipt #</th>
     <th>Customer</th>
+    <th>Total</th>
+    <th>Status</th>
   </tr>
   <tr *ngFor="let invoice of invoices">
-      <td><a routerLink="/invoice/{{invoice.id}}">{{invoice.id}}</a></td>
+      <td><a routerLink="/invoices/{{invoice.id}}">{{invoice.id}}</a></td>
       <td>{{invoice.customer}}</td>
+      <td>{{invoice.amountPaidDollars | currency : "USD"}}</td>
+      <td>{{invoice.status}}</td>
   </tr>
 </table>

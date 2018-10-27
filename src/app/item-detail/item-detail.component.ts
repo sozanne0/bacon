@@ -46,7 +46,10 @@ export class ItemDetailComponent implements OnInit {
 }
 
   save(): void {
-    this.invoiceLine.totalCost = this.invoiceLine.quantity * this.invoiceLine.unitCost;
+//    const objInvoiceLine = Object.assign(new InvoiceLine(), this.invoiceLine);
+    this.invoiceLine.prepareToSave();
+//    this.invoiceLine.totalCostDollars =
+//      this.invoiceLine.quantity * this.invoiceLine.unitCostDollars;
     if (typeof this.invoiceLine.vendor === 'object') {
       this.invoiceLine.vendorId = this.invoiceLine.vendor.id;
       // console.log(JSON.stringify(this.invoiceLine));

@@ -1,56 +1,56 @@
 <div *ngIf="invoice">
-    <h2>Sales Receipt {{invoice.id}} Details</h2>
-    <table>
-      <tr>
-        <td>
-            <label>customer:
-              <input [(ngModel)]="invoice.customer" placeholder="customer"/>
-            </label>
-        </td>
-        <td>
-          <label>address:
-            <input [(ngModel)]="invoice.address" placeholder="address"/>
-          </label>
-        </td>
-        <td>
-          <label>contact:
-            <input [(ngModel)]="invoice.contact" placeholder="phone/email"/>
-          </label>
-        </td>
-        <td>
-          <label>Amount Paid:
-            <input [(ngModel)]="invoice.amountPaid" placeholder="amount paid"/>
-          </label>
-        </td>
-      </tr>
-    </table>
-    <div>
-      <button (click)="balanceInvoice()">Balance</button>&nbsp;
+    <h2>Sales Receipt Number {{invoice.id}}</h2>
+    <p class="info">1) Write this receipt number on the paper sales receipt <b>(right now!)</b></p>
+    <label class="right-aligned-label">Amount Paid:
+        <input [(ngModel)]="invoice.amountPaidDollars" placeholder="amount paid"/>
+    </label>
+    <p class="info">2)Then enter amount paid from paper sales receipt and click 'Save':&nbsp;
+        <button (click)="save()">Save</button>&nbsp;
+      </p>
+   <div>
+      <p class="info">3) Use the 'Add' button below to add individual line items.  When you are done entering all lines, click 'Balance': &nbsp;
+      <button (click)="balanceInvoice()" [disabled]="invoice.status == 'New'">Balance</button>&nbsp;</p>
     </div>
-    <div>
-      Status: {{invoice.status}}
-    </div>
-    <div *ngIf="(invoice.status === 'Error') || ((invoice.correctionAmt !== undefined) && (invoice.correctionAmt !== 0))">
+    <div *ngIf="(invoice.status === 'Error')
+        || ((invoice.status === 'Balanced') &&
+            ((invoice.correctionAmt !== undefined) && (invoice.correctionAmt !== 0)))">
+    <p class="info">4) If a correction/description is entered or the total amount has been changed,
+      click 'Balance' again (use negative number if total is > amount paid)</p>
       <table>
         <tr>
           <td>
-            <label>Correction:
-              <input [(ngModel)]="invoice.correctionAmt" placeholder="amount"/>
+            <label class="right-aligned-label">Correction Amt:
+              <!--
+              <input [ngModel]="invoice.correctionAmtDollars | currency : 'USD'"
+                (ngModelChange)="invoice.correctionAmtDollars=$event"
+                name="inputField" type="text"placeholder="amount"/>
+              -->
+              <input [(ngModel)]="invoice.correctionAmtDollars" placeholder="amount"/>
+
             </label>
           </td>
           <td>
-            <label>Correction Description:
+            <label class="right-aligned-label">Description:
               <input [(ngModel)]="invoice.correctionDescription" placeholder="Correction description"/>
             </label>
           </td>
         </tr>
       </table>
     </div>
-<!--    <div><span>created: </span>{{invoice.timeCreated}}</div> -->
+    <div>
+        <div *ngIf="(invoice.status !== 'Error')"><p>Status: {{invoice.status}}</p></div>
+        <div *ngIf="(invoice.status === 'Error')"><p>Status: {{invoice.status}} &nbsp;additional correction needed: {{diff}}</p></div>
+    </div>
+  <!--    <div><span>created: </span>{{invoice.timeCreated}}</div> -->
     <div><span>Total Receipt Amount: </span>{{itemSum | currency : "USD"}}</div>
+    <p>
+      <button (click)="goBack()">Go Back</button>
+      &nbsp; &nbsp;
+      <button (click)="setOpenStatus()" [disabled]="invoice.status !== 'Balanced'">Reopen</button>
+    </p>
 
-    <app-items [invoice]="invoice" (change)="sumChange($event)"></app-items>
+    <div *ngIf="(invoice.status !== 'New')">
+      <app-items [invoice]="invoice" (change)="sumChange($event)"></app-items>
+    </div>
 
-    <button (click)="save()">Save</button>&nbsp;
-    <button (click)="goBack()">go back</button>
   </div>

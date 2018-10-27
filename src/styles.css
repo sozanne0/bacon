@@ -12,8 +12,8 @@ h2, h3 {
 body {
   margin: 2em;
 }
-body, input[text], button {
-  color: #888;
+body, input[text] {
+  color: rgb(36, 33, 33);
   font-family: Cambria, Georgia;
 }
 /* everywhere else */
@@ -21,22 +21,94 @@ body, input[text], button {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* nav links */
-nav a {
-  padding: 5px 10px;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
+.right-aligned-label label {
+  float: left;
+  width: 10em;
+  margin-right: 1em;
+  text-align: right;
+}
+
+p.info {
+  color: rgb(34, 107, 150);
+}
+
+.alert {
+  color: red;
+}
+
+/* Table Style */
+.slist {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.slist td, .slist th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.slist tr:nth-child(even){background-color: #f2f2f2;}
+
+.slist tr:hover {background-color: #ddd;}
+
+.slist th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+/*
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* more stypes */
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+}
+
+select {
+  height: 2em;
+  font-size: 1em;
+}
+
+button {
+  margin-top: 20px;
+  font-family: Arial;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
   border-radius: 4px;
+  cursor: pointer; cursor: hand;
 }
-nav a:visited, a:link {
-  color: #607d8b;
+button:hover {
+  background-color: rgb(94, 216, 98);
 }
-nav a:hover {
-  color: #039be5;
-  background-color: #cfd8dc;
+button:disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: auto;
 }
-nav a.active {
-  color: #039be5;
+/*
+td {
+  width: 20em;
 }
+*/

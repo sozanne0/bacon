@@ -23,28 +23,55 @@ export class ItemsService {
     private vendorService: VendorService
   ) {}
 
-//  private invoicesUrl = 'api/invoices';  // URL to web api
-  private invoiceLinesUrl = 'api/invoicelines';  // URL to web api
+  private invoicesUrl = 'api/receipts';  // URL to web api
+  private invoiceLinesUrl = 'api/items';  // URL to web api
 
     /** get all invoiceLines for Invoice */
     getInvoiceInvoiceLines(invoice: Invoice | number): Observable<InvoiceLine[]> {
       const id = typeof invoice === 'number' ? invoice : invoice.id;
-      const url = `${this.invoiceLinesUrl}/?invoiceId=${id}`;
+      const url = `${this.invoicesUrl}/${id}/items`;
       /**const url = this.invoiceLinesUrl; */
+      this.log(`filtered Invoice line list URL: ${url}`);
       return this.http.get<InvoiceLine[]>(url, httpOptions)
+        .pipe(map(jsonLines => this.convertLines(jsonLines)))
         .pipe(
           tap(lines => this.addVendors(lines)),
-          tap(lines => this.log('fetched invoice lines')),
+          tap(lines => this.log(`returned with ${lines.length} items`)),
           catchError(this.handleError('getInvoiceLines', []))
       );
+    }
+/**
+    getInvoiceInvoiceLines2(invoice: Invoice | number): Observable<InvoiceLine[]> {
+      const id = typeof invoice === 'number' ? invoice : invoice.id;
+      const url = `${this.invoiceLinesUrl}/?receiptId=${id}`;
+      this.log(`getting items for: ${JSON.stringify(invoice)}`);
+      this.log(`using URL: ${url}`);
+      // const url = this.invoiceLinesUrl;
+      return this.http.get<InvoiceLine[]>(url, httpOptions)
+        .pipe(map(jsonLines => this.convertLines(jsonLines)))
+        .pipe(
+          tap(lines => this.addVendors(lines)),
+          tap(lines => this.log('fetched items')),
+          catchError(this.handleError('getInvoiceLines', []))
+      );
+    }
+*/
+    convertLines(lines: InvoiceLine[]): InvoiceLine[] {
+      const tempLines: InvoiceLine[] = [];
+      lines.forEach(function(item) {
+        tempLines.push(new InvoiceLine(item));
+      });
+      return tempLines;
     }
 
     /** GET invoiceLine by id. Will 404 if id not found */
     getInvoiceLine(id: number): Observable<InvoiceLine> {
       const url = `${this.invoiceLinesUrl}/${id}`;
-      return this.http.get<InvoiceLine>(url).pipe(
+      return this.http.get<InvoiceLine>(url)
+      .pipe(map(jsonLine => new InvoiceLine(jsonLine)))
+      .pipe(
         tap(aLine => this.addVendor(aLine)),
-        tap(_ => this.log(`fetched invoiceLine id=${id}`)),
+        tap(_ => this.log(`fetched item id=${id}`)),
         catchError(this.handleError<InvoiceLine>(`getInvoiceLine id=${id}`))
       );
     }
@@ -56,24 +83,33 @@ export class ItemsService {
 
     private addVendor(iLine: InvoiceLine): InvoiceLine {
       const vid = typeof iLine === 'object' ? iLine.vendorId : undefined;
-      this.log(`Adding Vendor:${vid} for line:${iLine}`);
-      this.vendorService.getVendor(vid)
-          .subscribe(aVendor => iLine.vendor = aVendor);
+      this.log(`Adding Vendor:${vid} for line:${iLine.id}`);
+      if (vid !== undefined) {
+        this.vendorService.getVendor(vid)
+        .subscribe(aVendor => iLine.vendor = aVendor);
+      }
 
       return iLine;
     }
 
     /** POST: add a new invoiceLine to the server */
     addInvoiceLine (invoiceLine: InvoiceLine): Observable<InvoiceLine> {
-      return this.http.post<InvoiceLine>(this.invoiceLinesUrl, invoiceLine, httpOptions).pipe(
-        tap((anInvoiceLine: InvoiceLine) => this.log(`added invoice w/ id=${anInvoiceLine.id}`)),
+      return this.http.post<InvoiceLine>(this.invoiceLinesUrl, invoiceLine, httpOptions)
+      .pipe(map(jsonLine => new InvoiceLine(jsonLine)))
+      .pipe(
+        tap((anInvoiceLine: InvoiceLine) => this.log(`added item: ${JSON.stringify(anInvoiceLine)}`)),
         catchError(this.handleError<InvoiceLine>('addInvoiceLine'))
       );
     }
 
     /** PUT: update the invoiceLine on the server */
     updateInvoiceLine (invoiceLine: InvoiceLine): Observable<InvoiceLine> {
-      return this.http.put<InvoiceLine>(this.invoiceLinesUrl, invoiceLine, httpOptions).pipe(
+    //  const msg = `iLine unitCost: ${invoiceLine.unitCost}, ucd:${invoiceLine.unitCostDollars}`;
+    //  this.log(msg);
+    //  this.log(JSON.stringify(invoiceLine));
+      const url = `${this.invoiceLinesUrl}/${invoiceLine.id}`;
+    //  this.log(`URL: ${url}`);
+      return this.http.patch<InvoiceLine>(url, invoiceLine, httpOptions).pipe(
       //  tap((anInvoiceLine: InvoiceLine) => this.addVendor(anInvoiceLine)),
         tap(_ => this.log(`updated invoiceLine id=${invoiceLine.id}`)),
         catchError(this.handleError<any>('updateInvoiceLine'))
@@ -115,7 +151,7 @@ export class ItemsService {
      */
     private log(message: string) {
       // TODO: implement logging for users
-      // console.log(message);
+      console.log(message);
     }
 
 }

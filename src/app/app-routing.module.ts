@@ -8,15 +8,17 @@ import { InvoiceDetailComponent } from './invoice-detail/invoice-detail.componen
 import { VendorDetailComponent } from './vendor-detail/vendor-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ReportsComponent } from './reports/reports.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'users', component: UsersComponent },
   { path: 'invoices', component: InvoicesComponent },
-  { path: 'invoice/:id', component: InvoiceDetailComponent },
-  { path: 'item/:id', component: ItemDetailComponent },
+  { path: 'invoices/:id', component: InvoiceDetailComponent },
+  { path: 'items/:id', component: ItemDetailComponent },
   { path: 'vendors', component: VendorsComponent },
-  { path: 'vendor/:id', component: VendorDetailComponent },
+  { path: 'vendors/:id', component: VendorDetailComponent },
   { path: 'reports', component: ReportsComponent }
 ];
 

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
+
 
 import { Vendor } from './vendor';
 
@@ -18,7 +20,8 @@ export class VendorService {
     private http: HttpClient
   ) {}
 
-  private vendorsUrl = 'api/vendors';  // URL to web api
+//  private vendorsUrl = 'api/vendors';  // URL to web api
+  private vendorsUrl = `${environment.baseUrl}/vendors`;  // URL to web api
 
   /** get all vendors */
   getVendors(): Observable<Vendor[]> {
@@ -39,7 +42,7 @@ export class VendorService {
     );
   }
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new vendor to the server */
   addVendor (vendor: Vendor): Observable<Vendor> {
     return this.http.post<Vendor>(this.vendorsUrl, vendor, httpOptions).pipe(
       tap((aVendor: Vendor) => this.log(`added vendor w/ id=${aVendor.id}`)),
@@ -49,9 +52,10 @@ export class VendorService {
 
   /** PUT: update the vendor on the server */
   updateVendor (vendor: Vendor): Observable<any> {
-    return this.http.put(this.vendorsUrl, vendor, httpOptions).pipe(
+    const url = `${this.vendorsUrl}/${vendor.id}`;
+    return this.http.patch(url, vendor, httpOptions).pipe(
       tap(_ => this.log(`updated vendor id=${vendor.id}`)),
-      catchError(this.handleError<any>('updateVendor'))
+      catchError(this.handleError<any>(`updateVendor id=${vendor.id}`))
     );
   }
 
@@ -92,6 +96,6 @@ export class VendorService {
    */
   private log(message: string) {
     // TODO: implement logging for users
-    // console.log(message);
+     console.log(message);
   }
 }

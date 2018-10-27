@@ -8,5 +8,6 @@ export class Vendor {
   state: string;
   zip: number;
   category: number;
+  location: string;
   description: string;
 }
