@@ -19,6 +19,10 @@ nav a {
   border-radius: 4px;
 }
 
+.button-block {
+  display:inline-block;
+}
+
 /*
 nav a:visited, a:link {
   color: #607d8b;

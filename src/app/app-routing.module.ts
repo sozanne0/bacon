@@ -9,6 +9,7 @@ import { VendorDetailComponent } from './vendor-detail/vendor-detail.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UsersComponent } from './users/users.component';
+import { VendorReportComponent } from './vendor-report/vendor-report.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'items/:id', component: ItemDetailComponent },
   { path: 'vendors', component: VendorsComponent },
   { path: 'vendors/:id', component: VendorDetailComponent },
-  { path: 'reports', component: ReportsComponent }
+  { path: 'reports', component: ReportsComponent },
+  { path: 'vendorSalesReport', component: VendorReportComponent }
 ];
 
 @NgModule({

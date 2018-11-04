@@ -59,29 +59,13 @@ p.info {
   background-color: #4CAF50;
   color: white;
 }
-/*
-td, th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2;}
-
-tr:hover {background-color: #ddd;}
-
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
 
 /* more stypes */
 input {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
+  width: 70%;
 }
 
 select {
@@ -107,8 +91,33 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
-/*
-td {
-  width: 20em;
+/* labels and input field style */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
 }
-*/
+.col-25 {
+  float: left;
+  widows: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+/* clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* adjust when screen is < 600px wide */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}

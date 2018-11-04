@@ -4,7 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Invoice } from './invoice';
-import { InvoiceLine } from './invoice-line';
+import { environment } from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +19,7 @@ export class InvoiceService {
     private http: HttpClient
 ) {}
 
-  private invoicesUrl = 'api/receipts';  // URL to web api
+  private invoicesUrl = `${environment.baseUrl}/receipts`;  // URL to web api
   // private invoiceLinesUrl = 'api/items';  // URL to web api
 
   /** get all invoices */
@@ -28,6 +28,18 @@ export class InvoiceService {
     .pipe(map(jsonIinvoices => this.convertInvoices(jsonIinvoices)))
     .pipe(
         tap(invoices => this.log(`fetched ${invoices.length} receipts`)),
+        catchError(this.handleError('getReceipts', []))
+    );
+  }
+
+  /** get all invoices for user */
+  getUserInvoices(userId: number): Observable<Invoice[]> {
+    const url = `${this.invoicesUrl}q?userId=${userId}`;
+    this.log(`getting user invoices, url: ${url}`);
+    return this.http.get<Invoice[]>(url)
+    .pipe(map(jsonIinvoices => this.convertInvoices(jsonIinvoices)))
+    .pipe(
+        tap(invoices => this.log(`fetched ${invoices.length} user receipts`)),
         catchError(this.handleError('getReceipts', []))
     );
   }

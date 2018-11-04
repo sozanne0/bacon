@@ -27,11 +27,10 @@ export class VendorService {
   getVendors(): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(this.vendorsUrl)
       .pipe(
-        tap(() => this.log(`fetched vendors`)),
+        tap(vendors => this.log(`fetched ${vendors.length} vendors`)),
         catchError(this.handleError('getVendors', []))
     );
   }
-
 
   /** GET vendor by id. Will 404 if id not found */
   getVendor(id: number): Observable<Vendor> {
@@ -44,9 +43,10 @@ export class VendorService {
 
   /** POST: add a new vendor to the server */
   addVendor (vendor: Vendor): Observable<Vendor> {
-    return this.http.post<Vendor>(this.vendorsUrl, vendor, httpOptions).pipe(
-      tap((aVendor: Vendor) => this.log(`added vendor w/ id=${aVendor.id}`)),
-      catchError(this.handleError<Vendor>('addvendor'))
+    return this.http.post<Vendor>(this.vendorsUrl, vendor, httpOptions)
+      .pipe(
+        tap((aVendor: Vendor) => this.log(`added vendor w/ id=${aVendor.id}`)),
+        catchError(this.handleError<Vendor>('addvendor'))
     );
   }
 

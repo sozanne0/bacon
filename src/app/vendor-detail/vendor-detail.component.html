@@ -1,59 +1,50 @@
 <div *ngIf="vendor">
     <h2>{{vendor.name | uppercase}} Details</h2>
     <div><span>id: </span>{{vendor.id}}</div>
-    <div>
-      <label>name:
-        <input [(ngModel)]="vendor.name" placeholder="name"/>
-      </label>
+    <div class="container">
+      <div class="row">
+        <div class="col-25"><label for="name">Name:</label></div>
+        <div class="col-75"><input id="name" [(ngModel)]="vendor.name" placeholder="name"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="code">Code:</label></div>
+        <div class="col-75"><input id="code" [(ngModel)]="vendor.code" placeholder="code"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="address1">Address:</label></div>
+        <div class="col-75"><input id="address1" [(ngModel)]="vendor.address1" placeholder="address1"/></div>
+      </div>
+      <!--
+      <div class="row">
+        <div class="col-25"><label for="address2">Address 2:</label></div>
+        <div class="col-75"><input id="address2" [(ngModel)]="vendor.address2" placeholder="address2"/></div>
+      </div>
+    -->
+      <div class="row">
+        <div class="col-25"><label for="city">City:</label></div>
+        <div class="col-75"><input id="city" [(ngModel)]="vendor.city" placeholder="city"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="state">State:</label></div>
+        <div class="col-75"><input id="state" [(ngModel)]="vendor.state" placeholder="state"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="zip">Zip:</label></div>
+        <div class="col-75"><input id="zip" [(ngModel)]="vendor.zip" placeholder="zip"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="location">Location:</label></div>
+        <div class="col-75"><input id="location" [(ngModel)]="vendor.location" placeholder="location"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="description">Description:</label></div>
+        <div class="col-75"><input id="description" [(ngModel)]="vendor.description" placeholder="description"/></div>
+      </div>
+      <div class="row">
+        <div class="col-25"><label for="category">Category:</label></div>
+        <div class="col-75"><input id="category" [(ngModel)]="vendor.category" placeholder="category"/></div>
+      </div>
     </div>
-    <div>
-      <label>code:
-        <input [(ngModel)]="vendor.code" placeholder="code"/>
-      </label>
-    </div>
-    <!--
-    <div>
-      <label>address1:
-        <input [(ngModel)]="vendor.address1" placeholder="address1"/>
-      </label>
-    </div>
-    <div>
-      <label>address2:
-        <input [(ngModel)]="vendor.address2" placeholder="address2"/>
-      </label>
-    </div>
-    <div>
-      <label>city:
-        <input [(ngModel)]="vendor.city" placeholder="city"/>
-      </label>
-    </div>
-    <div>
-      <label>state:
-        <input [(ngModel)]="vendor.state" placeholder="state"/>
-      </label>
-    </div>
-    <div>
-      <label>zip:
-        <input [(ngModel)]="vendor.zip" placeholder="zip"/>
-      </label>
-    </div>
-    <div>
-      <label>category:
-        <input [(ngModel)]="vendor.category" placeholder="category"/>
-      </label>
-    </div>
-  -->
-    <div>
-      <label>location:
-        <input width=80 [(ngModel)]="vendor.description" placeholder="description"/>
-      </label>
-    </div>
-    <div>
-      <label>description:
-        <input width=80 [(ngModel)]="vendor.description" placeholder="description"/>
-      </label>
-    </div>
-
     <button (click)="save()">Save</button>&nbsp;&nbsp;
     <button (click)="goBack()">Go Back</button>
   </div>

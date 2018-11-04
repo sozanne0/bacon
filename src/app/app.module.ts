@@ -18,6 +18,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { DateTimeComponent } from './date-time.component';
 import { ItemsComponent } from './items/items.component';
 import { UsersComponent } from './users/users.component';
+import { VendorReportComponent } from './vendor-report/vendor-report.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UsersComponent } from './users/users.component';
     ReportsComponent,
     DateTimeComponent,
     ItemsComponent,
-    UsersComponent
+    UsersComponent,
+    VendorReportComponent
   ],
   imports: [
     BrowserModule,

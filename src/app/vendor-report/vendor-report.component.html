@@ -1,0 +1,29 @@
+<div *ngFor="let vendor of vendors">
+  <h2>Gross Sales Audit Report - ***Preliminary***</h2>
+  <h2>Vendor: {{vendor.name}} ({{vendor.code}})</h2>
+  <p>{{vendor.description}}</p>
+ <!-- <p>email: {{vendor.email}} phone: {{vendor.phone}} </p> -->
+  <p>Address: {{vendor.address1}},
+    {{vendor.city}}, {{vendor.state}} {{vendor.zip}}
+  </p>
+  Sales:
+  <table class="slist">
+    <tr>
+      <th>Description</th>
+      <th>Qty</th>
+      <th>Unit Price</th>
+      <th>Total Price</th>
+    </tr>
+    <tr *ngFor="let line of vendor.invoiceLines">
+      <td>{{line.description}}</td>
+      <td>{{line.quantity}}</td>
+      <td>{{line.unitCostDollars | currency : "USD"}}</td>
+      <td>{{line.totalCostDollars | currency : "USD"}}</td>
+    </tr>
+    <tr>
+      <td></td><td></td><td>Total Gross Sales:</td><td>{{vendor.itemSumDollars | currency : "USD"}}</td>
+    </tr>
+  </table>
+  <div class="page-break"></div>
+</div>
+

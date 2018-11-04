@@ -5,9 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Invoice } from './invoice';
 import { InvoiceLine } from './invoice-line';
-import { VendorService } from './vendor.service';
 import { Vendor } from './vendor';
-import { forEach } from '@angular/router/src/utils/collection';
+import { VendorService } from './vendor.service';
+import { environment } from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,8 +23,9 @@ export class ItemsService {
     private vendorService: VendorService
   ) {}
 
-  private invoicesUrl = 'api/receipts';  // URL to web api
-  private invoiceLinesUrl = 'api/items';  // URL to web api
+  private invoicesUrl = `${environment.baseUrl}/receipts`;  // URL to web api
+  private invoiceLinesUrl = `${environment.baseUrl}/items`;  // URL to web api
+  private vendorsUrl = `${environment.baseUrl}/vendors`;  // URL to web api
 
     /** get all invoiceLines for Invoice */
     getInvoiceInvoiceLines(invoice: Invoice | number): Observable<InvoiceLine[]> {
@@ -40,27 +41,29 @@ export class ItemsService {
           catchError(this.handleError('getInvoiceLines', []))
       );
     }
-/**
-    getInvoiceInvoiceLines2(invoice: Invoice | number): Observable<InvoiceLine[]> {
-      const id = typeof invoice === 'number' ? invoice : invoice.id;
-      const url = `${this.invoiceLinesUrl}/?receiptId=${id}`;
-      this.log(`getting items for: ${JSON.stringify(invoice)}`);
-      this.log(`using URL: ${url}`);
-      // const url = this.invoiceLinesUrl;
+
+    /** get all invoiceLines for Vendor */
+    getVendorInvoiceLines(vendor: Vendor): Observable<InvoiceLine[]> {
+      const id = vendor.id;
+      const url = `${this.vendorsUrl}/${id}/items`;
+      /**const url = this.invoiceLinesUrl; */
+      this.log(`filtered Vendor Invoice line list URL: ${url}`);
       return this.http.get<InvoiceLine[]>(url, httpOptions)
         .pipe(map(jsonLines => this.convertLines(jsonLines)))
         .pipe(
-          tap(lines => this.addVendors(lines)),
-          tap(lines => this.log('fetched items')),
+          tap(lines => vendor.invoiceLines = lines),
+         // tap(lines => this.addVendorToLines(vendor, lines)), // not needed
+          tap(lines => this.log(`returned with ${lines.length} items for vendor ${vendor.id}`)),
           catchError(this.handleError('getInvoiceLines', []))
       );
     }
-*/
+
     convertLines(lines: InvoiceLine[]): InvoiceLine[] {
       const tempLines: InvoiceLine[] = [];
       lines.forEach(function(item) {
         tempLines.push(new InvoiceLine(item));
       });
+      this.log(`converted ${tempLines.length}`);
       return tempLines;
     }
 

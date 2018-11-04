@@ -14,6 +14,7 @@ import { User } from '../user';
 export class InvoicesComponent implements OnInit {
 
   invoices: Invoice[];
+  currentUser: User;
 
   constructor(
     private invoiceService: InvoiceService,
@@ -23,12 +24,27 @@ export class InvoicesComponent implements OnInit {
     ) { }
 
   getInvoices(): void {
-    this.invoiceService.getInvoices()
+    if (this.isCurrentUserUndefined()) {
+      this.invoiceService.getInvoices()
           .subscribe(invoices => this.invoices = invoices);
+    } else {
+      this.invoiceService.getUserInvoices(this.currentUser.id).subscribe( invoices => {
+        invoices.sort((a, b) => {
+          if (a.id > b.id) {
+            return -1;
+          } else if (a.id < b.id) {
+            return 1;
+          }
+          return 0;
+        });
+        this.invoices = invoices;
+      });
+    }
   }
 
   isCurrentUserUndefined(): boolean {
-    return this.userService.getCurrentUser() === undefined;
+    this.currentUser = this.userService.getCurrentUser();
+    return this.currentUser === undefined;
   }
 
   currentUserInfo(): String {

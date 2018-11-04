@@ -11,13 +11,11 @@
 <table class="slist">
   <tr>
     <th>Receipt #</th>
-    <th>Customer</th>
     <th>Total</th>
     <th>Status</th>
   </tr>
   <tr *ngFor="let invoice of invoices">
       <td><a routerLink="/invoices/{{invoice.id}}">{{invoice.id}}</a></td>
-      <td>{{invoice.customer}}</td>
       <td>{{invoice.amountPaidDollars | currency : "USD"}}</td>
       <td>{{invoice.status}}</td>
   </tr>

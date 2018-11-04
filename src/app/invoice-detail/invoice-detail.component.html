@@ -1,14 +1,14 @@
 <div *ngIf="invoice">
     <h2>Sales Receipt Number {{invoice.id}}</h2>
     <p class="info">1) Write this receipt number on the paper sales receipt <b>(right now!)</b></p>
+    <p class="info">2)Then enter amount paid from paper sales receipt and click 'Save'->:&nbsp;
+    </p>
     <label class="right-aligned-label">Amount Paid:
-        <input [(ngModel)]="invoice.amountPaidDollars" placeholder="amount paid"/>
+      <input [(ngModel)]="invoice.amountPaidDollars" placeholder="amount paid"/>
     </label>
-    <p class="info">2)Then enter amount paid from paper sales receipt and click 'Save':&nbsp;
-        <button (click)="save()">Save</button>&nbsp;
-      </p>
-   <div>
-      <p class="info">3) Use the 'Add' button below to add individual line items.  When you are done entering all lines, click 'Balance': &nbsp;
+    <button (click)="save()">Save</button>&nbsp;
+    <div>
+     <p class="info">3) Use the 'Add Line Item' button below to add individual line items.  When you are done entering all lines, click 'Balance'->: &nbsp;
       <button (click)="balanceInvoice()" [disabled]="invoice.status == 'New'">Balance</button>&nbsp;</p>
     </div>
     <div *ngIf="(invoice.status === 'Error')
