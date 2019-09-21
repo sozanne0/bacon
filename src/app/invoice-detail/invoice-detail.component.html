@@ -1,4 +1,5 @@
 <div *ngIf="invoice">
+<<<<<<< HEAD
     <h2>Sales Receipt Number {{invoice.id}}</h2>
     <p class="info">1) Write this receipt number on the paper sales receipt <b>(right now!)</b></p>
     <p class="info">2)Then enter amount paid from paper sales receipt and click 'Save'->:&nbsp;
@@ -31,12 +32,56 @@
           </td>
           <td>
             <label class="right-aligned-label">Description:
+=======
+    <h2>Sales Receipt {{invoice.id}} Details</h2>
+    <table>
+      <tr>
+        <td>
+            <label>customer:
+              <input [(ngModel)]="invoice.customer" placeholder="customer"/>
+            </label>
+        </td>
+        <td>
+          <label>address:
+            <input [(ngModel)]="invoice.address" placeholder="address"/>
+          </label>
+        </td>
+        <td>
+          <label>contact:
+            <input [(ngModel)]="invoice.contact" placeholder="phone/email"/>
+          </label>
+        </td>
+        <td>
+          <label>Amount Paid:
+            <input [(ngModel)]="invoice.amountPaid" placeholder="amount paid"/>
+          </label>
+        </td>
+      </tr>
+    </table>
+    <div>
+      <button (click)="balanceInvoice()">Balance</button>&nbsp;
+    </div>
+    <div>
+      Status: {{invoice.status}}
+    </div>
+    <div *ngIf="(invoice.status === 'Error') || ((invoice.correctionAmt !== undefined) && (invoice.correctionAmt !== 0))">
+      <table>
+        <tr>
+          <td>
+            <label>Correction:
+              <input [(ngModel)]="invoice.correctionAmt" placeholder="amount"/>
+            </label>
+          </td>
+          <td>
+            <label>Correction Description:
+>>>>>>> master
               <input [(ngModel)]="invoice.correctionDescription" placeholder="Correction description"/>
             </label>
           </td>
         </tr>
       </table>
     </div>
+<<<<<<< HEAD
     <div>
         <div *ngIf="(invoice.status !== 'Error')"><p>Status: {{invoice.status}}</p></div>
         <div *ngIf="(invoice.status === 'Error')"><p>Status: {{invoice.status}} &nbsp;additional correction needed: {{diff}}</p></div>
@@ -53,4 +98,13 @@
       <app-items [invoice]="invoice" (change)="sumChange($event)"></app-items>
     </div>
 
+=======
+<!--    <div><span>created: </span>{{invoice.timeCreated}}</div> -->
+    <div><span>Total Receipt Amount: </span>{{itemSum | currency : "USD"}}</div>
+
+    <app-items [invoice]="invoice" (change)="sumChange($event)"></app-items>
+
+    <button (click)="save()">Save</button>&nbsp;
+    <button (click)="goBack()">go back</button>
+>>>>>>> master
   </div>

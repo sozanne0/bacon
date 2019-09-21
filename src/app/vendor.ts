@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { InvoiceLine } from './invoice-line';
 
+=======
+>>>>>>> master
 export class Vendor {
   id: number;
   code: string;
@@ -10,6 +13,7 @@ export class Vendor {
   state: string;
   zip: number;
   category: number;
+<<<<<<< HEAD
   location: string;
   description: string;
   itemSumDollars: number; // calculated value
@@ -28,4 +32,7 @@ export class Vendor {
     this.location = json.location;
     this.description = json.description;
   }
+=======
+  description: string;
+>>>>>>> master
 }

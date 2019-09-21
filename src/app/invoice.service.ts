@@ -4,7 +4,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Invoice } from './invoice';
+<<<<<<< HEAD
 import { environment } from '../environments/environment';
+=======
+import { InvoiceLine } from './invoice-line';
+>>>>>>> master
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,14 +21,22 @@ export class InvoiceService {
 
   constructor(
     private http: HttpClient
+<<<<<<< HEAD
 ) {}
 
   private invoicesUrl = `${environment.baseUrl}/receipts`;  // URL to web api
   // private invoiceLinesUrl = 'api/items';  // URL to web api
+=======
+  ) {}
+
+  private invoicesUrl = 'api/invoices';  // URL to web api
+  private invoiceLinesUrl = 'api/invoicelines';  // URL to web api
+>>>>>>> master
 
   /** get all invoices */
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.invoicesUrl)
+<<<<<<< HEAD
     .pipe(map(jsonIinvoices => this.convertInvoices(jsonIinvoices)))
     .pipe(
         tap(invoices => this.log(`fetched ${invoices.length} receipts`)),
@@ -41,12 +53,18 @@ export class InvoiceService {
     .pipe(
         tap(invoices => this.log(`fetched ${invoices.length} user receipts`)),
         catchError(this.handleError('getReceipts', []))
+=======
+      .pipe(
+        tap(invoices => this.log('fetched invoices')),
+        catchError(this.handleError('getInvoices', []))
+>>>>>>> master
     );
   }
 
   /** GET invoice by id. Will 404 if id not found */
   getInvoice(id: number): Observable<Invoice> {
     const url = `${this.invoicesUrl}/${id}`;
+<<<<<<< HEAD
     return this.http.get<Invoice>(url)
     .pipe(map(jsonInvoice => new Invoice(jsonInvoice)))
     .pipe(
@@ -72,16 +90,35 @@ export class InvoiceService {
     .pipe(
       tap((invoic: Invoice) => this.log(`added receipt w/ id=${invoic.id}`)),
       catchError(this.handleError<Invoice>('addReceipt'))
+=======
+    return this.http.get<Invoice>(url).pipe(
+      tap(_ => this.log(`fetched invoice id=${id}`)),
+      catchError(this.handleError<Invoice>(`getInvoice id=${id}`))
+    );
+  }
+
+  /** POST: add a new invoice to the server */
+  addInvoice (invoice: Invoice): Observable<Invoice> {
+    return this.http.post<Invoice>(this.invoicesUrl, invoice, httpOptions).pipe(
+      tap((invoic: Invoice) => this.log(`added invoice w/ id=${invoic.id}`)),
+      catchError(this.handleError<Invoice>('addInvoice'))
+>>>>>>> master
     );
   }
 
   /** PUT: update the invoice on the server */
   updateInvoice (invoice: Invoice): Observable<any> {
+<<<<<<< HEAD
     const url = `${this.invoicesUrl}/${invoice.id}`;
     return this.http.patch(url, invoice, httpOptions).pipe(
       tap(_ => this.log(`updated receipt id=${invoice.id}`)),
     //  tap(inv => this.log(JSON.stringify(inv))),
       catchError(this.handleError<any>(`updateReceipt ${invoice.id}`))
+=======
+    return this.http.put(this.invoicesUrl, invoice, httpOptions).pipe(
+      tap(_ => this.log(`updated invoice id=${invoice.id}`)),
+      catchError(this.handleError<any>('updateInvoice'))
+>>>>>>> master
     );
   }
 
@@ -90,8 +127,13 @@ export class InvoiceService {
     const id = typeof invoice === 'number' ? invoice : invoice.id;
     const url = `${this.invoicesUrl}/${id}`;
     return this.http.delete<Invoice>(url, httpOptions).pipe(
+<<<<<<< HEAD
       tap(_ => this.log(`deleted receipt id=${id}`)),
       catchError(this.handleError<Invoice>('deleteReceipt'))
+=======
+      tap(_ => this.log(`deleted invoice id=${id}`)),
+      catchError(this.handleError<Invoice>('deleteInvoice'))
+>>>>>>> master
     );
   }
 
@@ -115,6 +157,7 @@ export class InvoiceService {
     };
   }
 
+<<<<<<< HEAD
   convertInvoices(invoices: Invoice[]): Invoice[] {
     const tempInvoices: Invoice[] = [];
     invoices.forEach(function(inv) {
@@ -128,5 +171,12 @@ export class InvoiceService {
    */
   private log(message: string) {
     console.log(message);
+=======
+  /**
+   * logging (TBD)
+   */
+  private log(message: string) {
+    // TODO: implement logging for users
+>>>>>>> master
   }
 }

@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+<<<<<<< HEAD
   production: false,
   baseUrl: 'api',  // <-- 'API/' prefix needed for proxy configuration
+=======
+  production: false
+>>>>>>> master
 };
 
 /*

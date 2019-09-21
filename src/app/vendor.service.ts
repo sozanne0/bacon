@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+<<<<<<< HEAD
 import { environment } from '../environments/environment';
 
+=======
+>>>>>>> master
 
 import { Vendor } from './vendor';
 
@@ -20,18 +23,30 @@ export class VendorService {
     private http: HttpClient
   ) {}
 
+<<<<<<< HEAD
 //  private vendorsUrl = 'api/vendors';  // URL to web api
   private vendorsUrl = `${environment.baseUrl}/vendors`;  // URL to web api
+=======
+  private vendorsUrl = 'api/vendors';  // URL to web api
+>>>>>>> master
 
   /** get all vendors */
   getVendors(): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(this.vendorsUrl)
       .pipe(
+<<<<<<< HEAD
         tap(vendors => this.log(`fetched ${vendors.length} vendors`)),
+=======
+        tap(() => this.log(`fetched vendors`)),
+>>>>>>> master
         catchError(this.handleError('getVendors', []))
     );
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   /** GET vendor by id. Will 404 if id not found */
   getVendor(id: number): Observable<Vendor> {
     const url = `${this.vendorsUrl}/${id}`;
@@ -41,21 +56,35 @@ export class VendorService {
     );
   }
 
+<<<<<<< HEAD
   /** POST: add a new vendor to the server */
   addVendor (vendor: Vendor): Observable<Vendor> {
     return this.http.post<Vendor>(this.vendorsUrl, vendor, httpOptions)
       .pipe(
         tap((aVendor: Vendor) => this.log(`added vendor w/ id=${aVendor.id}`)),
         catchError(this.handleError<Vendor>('addvendor'))
+=======
+  /** POST: add a new hero to the server */
+  addVendor (vendor: Vendor): Observable<Vendor> {
+    return this.http.post<Vendor>(this.vendorsUrl, vendor, httpOptions).pipe(
+      tap((aVendor: Vendor) => this.log(`added vendor w/ id=${aVendor.id}`)),
+      catchError(this.handleError<Vendor>('addvendor'))
+>>>>>>> master
     );
   }
 
   /** PUT: update the vendor on the server */
   updateVendor (vendor: Vendor): Observable<any> {
+<<<<<<< HEAD
     const url = `${this.vendorsUrl}/${vendor.id}`;
     return this.http.patch(url, vendor, httpOptions).pipe(
       tap(_ => this.log(`updated vendor id=${vendor.id}`)),
       catchError(this.handleError<any>(`updateVendor id=${vendor.id}`))
+=======
+    return this.http.put(this.vendorsUrl, vendor, httpOptions).pipe(
+      tap(_ => this.log(`updated vendor id=${vendor.id}`)),
+      catchError(this.handleError<any>('updateVendor'))
+>>>>>>> master
     );
   }
 
@@ -96,6 +125,10 @@ export class VendorService {
    */
   private log(message: string) {
     // TODO: implement logging for users
+<<<<<<< HEAD
      console.log(message);
+=======
+    // console.log(message);
+>>>>>>> master
   }
 }

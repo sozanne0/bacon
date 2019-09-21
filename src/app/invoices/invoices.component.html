@@ -1,16 +1,23 @@
 <H2>Sales Receipts</H2>
 <div>
+<<<<<<< HEAD
   (Current User: {{currentUserInfo()}})
   <div *ngIf="isCurrentUserUndefined()">Please Select Current User before proceeding!</div>
   <!-- (click) creates a new empty invoice -->
   <button (click)="add()" [disabled]="isCurrentUserUndefined()">
     Add Receipt
+=======
+  <!-- (click) creates a new empty invoice -->
+  <button (click)="add()">
+    Add
+>>>>>>> master
   </button>
 </div>
 
 <table class="slist">
   <tr>
     <th>Receipt #</th>
+<<<<<<< HEAD
     <th>Total</th>
     <th>Status</th>
   </tr>
@@ -18,5 +25,12 @@
       <td><a routerLink="/invoices/{{invoice.id}}">{{invoice.id}}</a></td>
       <td>{{invoice.amountPaidDollars | currency : "USD"}}</td>
       <td>{{invoice.status}}</td>
+=======
+    <th>Customer</th>
+  </tr>
+  <tr *ngFor="let invoice of invoices">
+      <td><a routerLink="/invoice/{{invoice.id}}">{{invoice.id}}</a></td>
+      <td>{{invoice.customer}}</td>
+>>>>>>> master
   </tr>
 </table>

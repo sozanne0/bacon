@@ -5,6 +5,7 @@ export class Invoice {
   customer: string;
   address: string;
   contact: string;
+<<<<<<< HEAD
   amountPaid: number; // amount paid in cents
   private _amountPaidDollars: number;
   status: string; // open | balanced | error
@@ -65,4 +66,13 @@ export class Invoice {
   log(message: string) {
     console.log(message);
   }
+=======
+  amountPaid: number;
+  status: string; // new | balanced | error
+  correctionAmt: number;
+  correctionDescription: string;
+  timeCreated: Date;
+//  timeUpdated: Date;
+  invoiceLines: InvoiceLine[];
+>>>>>>> master
 }

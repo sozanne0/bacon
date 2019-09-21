@@ -1,5 +1,6 @@
 <div *ngIf="invoiceLine">
   <h2>Line {{invoiceLine.line}} Details</h2>
+<<<<<<< HEAD
   <div><span>Sales Receipt #: </span>{{invoiceLine.receiptId}}</div>
   <div class="formGroup">
   <form #f="ngForm">
@@ -40,6 +41,46 @@
             required/></td>
         <td>{{invoiceLine.totalCostDollars | currency : "USD"}}</td>
       </tr>
+=======
+  <div><span>Sales Receipt #: </span>{{invoiceLine.invoiceId}}</div>
+  <div class="formGroup">
+  <form #f="ngForm">
+    <table>
+      <tr>
+        <th>Line</th><th>Vendor</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Total Price</th>
+      </tr>
+      <tr>
+          <td>{{invoiceLine.line}}</td>
+        <!--  <td><input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/></td><-->
+          <td>
+            <select [compareWith]="compareVendors"
+              id="vendor"
+              name="vendor"
+              [(ngModel)]="invoiceLine.vendor"
+              class="form-control"
+              #vendor=ngModel
+              required>
+              <option value="" disabled>Select a vendor code</option>
+              <option *ngFor="let vendor of vendors" [ngValue]="vendor">
+                {{ vendor.code }}
+              </option>
+            </select>
+          </td>
+          <td><input
+            [(ngModel)]="invoiceLine.description" placeholder="description" name="desc"/></td>
+          <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity" name="qty"
+              class="form-control"
+              type="number"
+              #qty=ngModel
+              required/></td>
+          <td><input [(ngModel)]="invoiceLine.unitCost" placeholder="unit cost" name="cost"
+              class="form-control"
+              type="number"
+              #cost=ngModel
+              required/></td>
+          <td>{{invoiceLine.totalCost | currency : "USD"}}</td>
+        </tr>
+>>>>>>> master
     </table>
   </form>
   </div>
@@ -60,6 +101,10 @@
   <!--<p>Form value: {{ f.value | json }}</p>-->
 
   <button (click)="save()" [disabled]="!f.valid">Save</button>&nbsp;
+<<<<<<< HEAD
   <button (click)="goBack()">Go Back</button>
+=======
+  <button (click)="goBack()">go back</button>
+>>>>>>> master
 </div>
 

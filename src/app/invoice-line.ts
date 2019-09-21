@@ -2,11 +2,16 @@ import { Vendor } from './vendor';
 
 export class InvoiceLine {
   id: number;
+<<<<<<< HEAD
   receiptId: number;
+=======
+  invoiceId: number;
+>>>>>>> master
   line: number;
   vendorId: number;
   vendor: Vendor;
   description: string;
+<<<<<<< HEAD
   unitCost: number; // integer cents
   private _unitCostDollars: number;
   quantity: number;
@@ -38,6 +43,13 @@ export class InvoiceLine {
     this._totalCostDollars = this.quantity * this.unitCostDollars;
   }
 
+=======
+  unitCost: number;
+  quantity: number;
+  totalCost: number;
+  dateCreated; Date;
+
+>>>>>>> master
   public setVendor(aVendor: Vendor): void {
     this.vendor = aVendor;
     if (typeof aVendor === 'object') {
@@ -45,6 +57,7 @@ export class InvoiceLine {
       console.log('vendor:', this.vendorId, ' set in item:', this.id);
     }
   }
+<<<<<<< HEAD
 
   get unitCostDollars(): number {
     return this._unitCostDollars;
@@ -72,4 +85,6 @@ export class InvoiceLine {
   log(message: string) {
     console.log(message);
   }
+=======
+>>>>>>> master
 }
