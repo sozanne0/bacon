@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /* HeroDetailComponent's private CSS styles */
 label {
   display: inline-block;
@@ -6,10 +8,14 @@ label {
   color: #607D8B;
   font-weight: bold;
 }
+>>>>>>> master
 input {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
+<<<<<<< HEAD
+  width: 20%;
+=======
 }
 button {
   margin-top: 20px;
@@ -30,4 +36,5 @@ button:disabled {
 }
 td {
   width: 20em;
+>>>>>>> master
 }

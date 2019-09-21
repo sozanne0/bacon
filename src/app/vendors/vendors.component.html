@@ -2,10 +2,17 @@
 <div>
     <label>Vendor name:
       <input #vendorName />
+<<<<<<< HEAD
+    </label>&nbsp;&nbsp;
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(vendorName.value); vendorName.value=''">
+      Add New Vendor
+=======
     </label>
     <!-- (click) passes input value to add() and then clears the input -->
     <button (click)="add(vendorName.value); vendorName.value=''">
       add
+>>>>>>> master
     </button>
   </div>
 
@@ -14,11 +21,23 @@
     <th>Vendor ID</th>
     <th>Vendor Code</th>
     <th>Vendor Name</th>
+<<<<<<< HEAD
+    <th>Location</th>
+    <th>Description</th>
+  </tr>
+  <tr *ngFor="let vendor of vendors">
+    <td><a routerLink="/vendors/{{vendor.id}}">{{vendor.id}}</a></td>
+    <td>{{vendor.code}}</td>
+    <td>{{vendor.name}}</td>
+    <td>{{vendor.location}}</td>
+    <td>{{vendor.description}}</td>
+=======
   </tr>
   <tr *ngFor="let vendor of vendors">
     <td><a routerLink="/vendor/{{vendor.id}}">{{vendor.id}}</a></td>
     <td>{{vendor.code}}</td>
     <td>{{vendor.name}}</td>
+>>>>>>> master
   </tr>
 </table>
 

@@ -17,6 +17,11 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ReportsComponent } from './reports/reports.component';
 import { DateTimeComponent } from './date-time.component';
 import { ItemsComponent } from './items/items.component';
+<<<<<<< HEAD
+import { UsersComponent } from './users/users.component';
+import { VendorReportComponent } from './vendor-report/vendor-report.component';
+=======
+>>>>>>> master
 
 
 @NgModule({
@@ -31,7 +36,13 @@ import { ItemsComponent } from './items/items.component';
     ItemDetailComponent,
     ReportsComponent,
     DateTimeComponent,
+<<<<<<< HEAD
+    ItemsComponent,
+    UsersComponent,
+    VendorReportComponent
+=======
     ItemsComponent
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
@@ -41,9 +52,15 @@ import { ItemsComponent } from './items/items.component';
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
+<<<<<<< HEAD
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //  InMemoryDataService, { dataEncapsulation: false }
+    // ),
+=======
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
+>>>>>>> master
 
     AppRoutingModule
   ],

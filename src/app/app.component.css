@@ -14,6 +14,31 @@ nav a {
   text-decoration: none;
   margin-top: 10px;
   display: inline-block;
+<<<<<<< HEAD
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+}
+
+.button-block {
+  display:inline-block;
+}
+
+/*
+nav a:visited, a:link {
+  color: #607d8b;
+}
+*/
+nav a:hover {
+  /*color: #039be5; */
+  background-color: rgb(94, 216, 98);
+}
+/*
+nav a.active {
+  color: #039be5;
+}
+*/
+=======
   background-color: #eee;
   border-radius: 4px;
 }
@@ -61,3 +86,4 @@ nav a.active {
   border-left: 5px solid #a94442; /* red */
 }
 
+>>>>>>> master

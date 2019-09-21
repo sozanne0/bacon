@@ -12,8 +12,13 @@ h2, h3 {
 body {
   margin: 2em;
 }
+<<<<<<< HEAD
+body, input[text] {
+  color: rgb(36, 33, 33);
+=======
 body, input[text], button {
   color: #888;
+>>>>>>> master
   font-family: Cambria, Georgia;
 }
 /* everywhere else */
@@ -21,6 +26,107 @@ body, input[text], button {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+<<<<<<< HEAD
+.right-aligned-label label {
+  float: left;
+  width: 10em;
+  margin-right: 1em;
+  text-align: right;
+}
+
+p.info {
+  color: rgb(34, 107, 150);
+}
+
+.alert {
+  color: red;
+}
+
+/* Table Style */
+.slist {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.slist td, .slist th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.slist tr:nth-child(even){background-color: #f2f2f2;}
+
+.slist tr:hover {background-color: #ddd;}
+
+.slist th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* more stypes */
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  width: 70%;
+}
+
+select {
+  height: 2em;
+  font-size: 1em;
+}
+
+button {
+  margin-top: 20px;
+  font-family: Arial;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer; cursor: hand;
+}
+button:hover {
+  background-color: rgb(94, 216, 98);
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc;
+  cursor: auto;
+}
+/* labels and input field style */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+.col-25 {
+  float: left;
+  widows: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+/* clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* adjust when screen is < 600px wide */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+=======
 /* nav links */
 nav a {
   padding: 5px 10px;
@@ -39,4 +145,5 @@ nav a:hover {
 }
 nav a.active {
   color: #039be5;
+>>>>>>> master
 }
