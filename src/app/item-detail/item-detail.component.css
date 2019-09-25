@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 
 /* Table Style */
 .slist {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-=======
-.slist {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 50%;
->>>>>>> master
 }
 
 .slist td, .slist th {
@@ -29,7 +22,6 @@
   background-color: #4CAF50;
   color: white;
 }
-<<<<<<< HEAD
 /* Forms CSS (could be in separate file) */
 .ng-valid[required] input, .ng-valid.required input  {
   border-left: 5px solid #42A948; /* green */
@@ -48,5 +40,3 @@ td input {
 td input[type=number] {
   width: 70px;
 }
-=======
->>>>>>> master

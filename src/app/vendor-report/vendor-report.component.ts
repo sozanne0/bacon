@@ -6,6 +6,7 @@ import { ItemsService } from '../items.service';
 import { InvoiceLine } from '../invoice-line';
 import { VendorService } from '../vendor.service';
 import { Vendor } from '../vendor';
+import { SummaryInfo } from '../summary-info';
 
 @Component({
   selector: 'app-vendor-report',
@@ -16,7 +17,8 @@ export class VendorReportComponent implements OnInit {
 
   invoiceLines: InvoiceLine[];
   vendors: Vendor[];
-  vendorSums: [Vendor, number, number][];
+  summaryInfo: SummaryInfo[];
+  overallSummary: SummaryInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +28,14 @@ export class VendorReportComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    // initialize values to handle delayed load/compute
     this.vendors = [];
+    this.summaryInfo = [];
+    this.overallSummary =  new SummaryInfo({
+      'grossSumDollars': 0,
+      'consignmentShareDollars': 0,
+      'netSumDollars': 0 });
+
     // add every vendor (with items)
     this.loadVendors();
     this.log('exiting VendorReportComponent.ngOnInit()');
@@ -43,6 +52,7 @@ export class VendorReportComponent implements OnInit {
           this.itemsService.getVendorInvoiceLines(vendor).subscribe(
             lines => {
               this.computeValues(vendor);
+              this.computeOverall();
               this.log(`done adding ${lines.length} lines to vendor: ${vendor.id}`);
               this.vendors.push(vendor);
             }
@@ -62,9 +72,39 @@ export class VendorReportComponent implements OnInit {
     for (const line of vendor.invoiceLines) {
       sum += line.totalCostDollars;
     }
+    let netSum = sum;
+    if (vendor.category === 'v') {
+      netSum = sum * 0.8; // 20% to church (80% to vendor)
+      // now make sure that there are an integer number of cents!
+      netSum = Number(Math.round(netSum * 100) / 100);
+    } else if (vendor.category === 'c') {
+      netSum = 0; // 100% to church
+    }
+    const share = sum - netSum;
     vendor.itemSumDollars = sum;
+    this.summaryInfo[vendor.id] =  new SummaryInfo({
+      'grossSumDollars': sum,
+      'consignmentShareDollars': share,
+      'netSumDollars': netSum });
   }
 
+  /** Sum all vendor totals */
+  computeOverall() {
+    let grossSum = 0;
+    let consignmentShare = 0;
+    let netSum = 0;
+    for (const vSummary of this.summaryInfo) {
+      if (vSummary !== undefined) {
+        grossSum += vSummary.grossSumDollars;
+        consignmentShare += vSummary.consignmentShareDollars;
+        netSum += vSummary.netSumDollars;
+      }
+    }
+    this.overallSummary =  new SummaryInfo({
+      'grossSumDollars': grossSum,
+      'consignmentShareDollars': consignmentShare,
+      'netSumDollars': netSum });
+  }
 
   /**
    * logging (TBD)

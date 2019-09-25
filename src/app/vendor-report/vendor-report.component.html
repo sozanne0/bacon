@@ -1,3 +1,9 @@
+<h2>Overall Summary</h2>
+<p>Total Gross Sales: {{overallSummary.grossSumDollars | currency : "USD"}}</p>
+<p>Total Church's Consignment Share: {{overallSummary.consignmentShareDollars | currency : "USD"}}</p>
+<p>Total Net Vendor Sales: {{overallSummary.netSumDollars | currency : "USD"}}</p>
+
+<div class="page-break"></div>
 <div *ngFor="let vendor of vendors">
   <h2>Gross Sales Audit Report - ***Preliminary***</h2>
   <h2>Vendor: {{vendor.name}} ({{vendor.code}})</h2>
@@ -22,6 +28,12 @@
     </tr>
     <tr>
       <td></td><td></td><td>Total Gross Sales:</td><td>{{vendor.itemSumDollars | currency : "USD"}}</td>
+    </tr>
+    <tr>
+      <td></td><td></td><td>Consignment Share(20%):</td><td>{{summaryInfo[vendor.id].consignmentShareDollars | currency : "USD"}}</td>
+    </tr>
+    <tr>
+      <td></td><td></td><td>Total Net Sales:</td><td>{{summaryInfo[vendor.id].netSumDollars | currency : "USD"}}</td>
     </tr>
   </table>
   <div class="page-break"></div>

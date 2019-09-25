@@ -16,10 +16,7 @@ export class InvoiceDetailComponent implements OnInit {
 
   invoice: Invoice;
   itemSum: number;
-<<<<<<< HEAD
   diff: string;
-=======
->>>>>>> master
 
   constructor(
     private route: ActivatedRoute,
@@ -34,21 +31,16 @@ export class InvoiceDetailComponent implements OnInit {
   getInvoice(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.invoiceService.getInvoice(id)
-<<<<<<< HEAD
       .subscribe( anInvoice => {
         this.invoice = anInvoice;
         if (anInvoice.status === 'Error') {
           this.computeDiff();
         }
       });
-=======
-      .subscribe(anInvoice => this.invoice = anInvoice);
->>>>>>> master
   }
 
   sumChange(event) {
     this.itemSum = event;
-<<<<<<< HEAD
     this.computeDiff();
     // console.log('item sum changed');
   }
@@ -75,27 +67,10 @@ export class InvoiceDetailComponent implements OnInit {
     } else {
       this.setErrorStatus();
       this.save();
-=======
-    // console.log('item sum changed');
-  }
-
-  balanceInvoice() {
-    const itemSum = this.itemSum === undefined ? 0 : this.itemSum;
-    const amountPaid = this.invoice.amountPaid === undefined ? 0 : this.invoice.amountPaid;
-    const correction = this.invoice.correctionAmt === undefined ? 0 : this.invoice.correctionAmt;
-    let diff = (itemSum - amountPaid) - correction;
-    diff = +diff.toFixed(2);
-    console.log('sum:', itemSum, 'paid:', amountPaid, 'corr:', correction, ' diff:', diff);
-    if (diff === 0) {
-      this.invoice.status = 'Balanced';
-    } else {
-      this.invoice.status = 'Error';
->>>>>>> master
     }
   }
 
   save(): void {
-<<<<<<< HEAD
     if (this.invoice.status === undefined || this.invoice.status === 'New') {
       this.invoice.status = 'Open';
     }
@@ -116,26 +91,13 @@ export class InvoiceDetailComponent implements OnInit {
 
   setErrorStatus(): void {
     this.invoice.status = 'Error';
-=======
-    if (this.invoice.status === '') {
-      this.invoice.status = 'New';
-    }
-    if (this.invoice.correctionAmt === null) {
-      this.invoice.correctionAmt = 0;
-    }
-    this.invoiceService.updateInvoice(this.invoice)
-      .subscribe(() => this.goBack());
->>>>>>> master
   }
 
   goBack(): void {
     this.location.back();
   }
 
-<<<<<<< HEAD
   log(message: string) {
     console.log(message);
   }
-=======
->>>>>>> master
 }
