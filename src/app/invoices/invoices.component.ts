@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { InvoiceService } from '../invoice.service';
 import { Invoice } from '../invoice';
 import { UserService } from '../user.service';
 import { User } from '../user';
-=======
-
-import { InvoiceService } from '../invoice.service';
-import { Invoice } from '../invoice';
->>>>>>> master
 
 @Component({
   selector: 'app-invoices',
@@ -20,7 +14,6 @@ import { Invoice } from '../invoice';
 export class InvoicesComponent implements OnInit {
 
   invoices: Invoice[];
-<<<<<<< HEAD
   currentUser: User;
 
   constructor(
@@ -71,28 +64,12 @@ export class InvoicesComponent implements OnInit {
           this.router.navigate([`./${anInvoice.id}`], { relativeTo: this.route });
         });
     }
-=======
-
-  constructor(private invoiceService: InvoiceService) { }
-
-  getInvoices(): void {
-    this.invoiceService.getInvoices()
-          .subscribe(invoices => this.invoices = invoices);
-  }
-
-  add(): void {
-    this.invoiceService.addInvoice({ customer: '' } as Invoice)
-      .subscribe(invoice => {
-        this.invoices.push(invoice);
-      });
->>>>>>> master
   }
 
   ngOnInit() {
     this.getInvoices();
   }
 
-<<<<<<< HEAD
   /**
    * logging (TBD)
    */
@@ -101,6 +78,4 @@ export class InvoicesComponent implements OnInit {
      console.log(message);
   }
 
-=======
->>>>>>> master
 }

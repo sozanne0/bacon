@@ -1,7 +1,6 @@
 <div *ngIf="vendor">
     <h2>{{vendor.name | uppercase}} Details</h2>
     <div><span>id: </span>{{vendor.id}}</div>
-<<<<<<< HEAD
     <div class="container">
       <div class="row">
         <div class="col-25"><label for="name">Name:</label></div>
@@ -48,54 +47,4 @@
     </div>
     <button (click)="save()">Save</button>&nbsp;&nbsp;
     <button (click)="goBack()">Go Back</button>
-=======
-    <div>
-      <label>name:
-        <input [(ngModel)]="vendor.name" placeholder="name"/>
-      </label>
-    </div>
-    <div>
-      <label>code:
-        <input [(ngModel)]="vendor.code" placeholder="code"/>
-      </label>
-    </div>
-    <div>
-      <label>address1:
-        <input [(ngModel)]="vendor.address1" placeholder="address1"/>
-      </label>
-    </div>
-    <div>
-      <label>address2:
-        <input [(ngModel)]="vendor.address2" placeholder="address2"/>
-      </label>
-    </div>
-    <div>
-      <label>city:
-        <input [(ngModel)]="vendor.city" placeholder="city"/>
-      </label>
-    </div>
-    <div>
-      <label>state:
-        <input [(ngModel)]="vendor.state" placeholder="state"/>
-      </label>
-    </div>
-    <div>
-      <label>zip:
-        <input [(ngModel)]="vendor.zip" placeholder="zip"/>
-      </label>
-    </div>
-    <div>
-      <label>category:
-        <input [(ngModel)]="vendor.category" placeholder="category"/>
-      </label>
-    </div>
-    <div>
-      <label>description:
-        <input [(ngModel)]="vendor.description" placeholder="description"/>
-      </label>
-    </div>
-
-    <button (click)="save()">Save</button>
-    <button (click)="goBack()">go back</button>
->>>>>>> master
   </div>

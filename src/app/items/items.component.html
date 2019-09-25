@@ -1,15 +1,8 @@
 <div>
   <!-- (click) creates a new empty invoice line -->
-<<<<<<< HEAD
   <button (click)="add()" [disabled]="invoice.status === 'Balanced'">
     Add Line Item
   </button>
-=======
-  <button (click)="add()">
-    Add
-  </button>
-</div>
->>>>>>> master
 
 <table class="slist">
     <tr>
@@ -21,20 +14,11 @@
       <th>Total Price</th>
     </tr>
     <tr *ngFor="let line of invoiceLines">
-<<<<<<< HEAD
         <td><a routerLink="/items/{{line.id}}">{{line.line}}</a></td>
         <td>{{line?.vendor?.code}}</td>
         <td>{{line.description}}</td>
         <td>{{line.quantity}}</td>
         <td>{{line.unitCostDollars | currency : "USD"}}</td>
         <td>{{line.totalCostDollars | currency : "USD"}}</td>
-=======
-        <td><a routerLink="/item/{{line.id}}">{{line.line}}</a></td>
-        <td>{{line?.vendor?.code}}</td>
-        <td>{{line.description}}</td>
-        <td>{{line.quantity}}</td>
-        <td>{{line.unitCost | currency : "USD"}}</td>
-        <td>{{line.totalCost | currency : "USD"}}</td>
->>>>>>> master
     </tr>
   </table>
