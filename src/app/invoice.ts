@@ -13,6 +13,7 @@ export class Invoice {
   correctionDescription: string;
   userId: number;
   timeCreated: Date;
+  paymentMethod: String;
 //  timeUpdated: Date;
   invoiceLines: InvoiceLine[];
 
@@ -27,6 +28,7 @@ export class Invoice {
     this.correctionDescription = json.correctionDescription;
     this.userId = json.userId;
     this.timeCreated = json.timeCreated;
+    this.paymentMethod = json.paymentMethod;
     this.initDollars();
   }
 
