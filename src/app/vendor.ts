@@ -4,11 +4,12 @@ export class Vendor {
   id: number;
   code: string;
   name: string;
-  address1; string;
+  address1: string;
   address2: string;
   city: string;
   state: string;
   zip: number;
+  email: string;
   category: string;
   location: string;
   description: string;
@@ -24,6 +25,7 @@ export class Vendor {
     this.city = json.city;
     this.state = json.state;
     this.zip = json.zip;
+    this.email = json.email;
     this.category = json.category;
     this.location = json.location;
     this.description = json.description;

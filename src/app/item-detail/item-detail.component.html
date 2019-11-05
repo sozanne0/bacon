@@ -5,17 +5,11 @@
   <form #f="ngForm">
     <table class="slist">
       <tr>
-        <th>Line</th><th>Qty</th><th>Vendor Code</th><th>Description</th><th>Unit Price</th><th>Amount</th>
+        <th>Line</th><th>Vendor Code</th><th>Description</th><th>Qty</th><th>Unit Price</th><th>Amount</th>
       </tr>
       <tr>
         <td>{{invoiceLine.line}}</td>
         <!--  <td><input [(ngModel)]="invoiceLine.vendorId" placeholder="vendor"/></td><-->
-        <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity" name="qty"
-          class="form-control"
-          size="3"
-          type="number"
-          #qty=ngModel
-          required/></td>
         <td>
           <select [compareWith]="compareVendors"
             id="vendor"
@@ -32,12 +26,18 @@
         </td>
         <td><input
           [(ngModel)]="invoiceLine.description" placeholder="description" size="40" name="desc"/></td>
+        <td><input [(ngModel)]="invoiceLine.quantity" placeholder="quantity" name="qty"
+          class="form-control"
+          size="3"
+          type="number"
+          #qty=ngModel
+          required/></td>
         <td><input [(ngModel)]="invoiceLine.unitCostDollars" placeholder="unit cost" name="cost"
-            class="form-control"
-            type="number"
-            size="7"
-            #cost=ngModel
-            required/></td>
+          class="form-control"
+          type="number"
+          size="7"
+          #cost=ngModel
+          required/></td>
         <td>{{invoiceLine.totalCostDollars | currency : "USD"}}</td>
       </tr>
     </table>
